@@ -15,9 +15,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::post('/search', [SearchController::class, 'search'])->name('apartments.search');
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-
-Route::post('/search', [SearchController::class, 'search'])->name('apartments.search');

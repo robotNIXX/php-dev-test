@@ -14,6 +14,7 @@ class SearchController extends Controller
         $this->apartmentsService = $apartmentsService;
     }
     public function search(SearchRequest $request) {
+        dd($request->all());
         $result = $this->apartmentsService->find($request->only(['name', 'bedrooms', 'bathrooms', 'storeys', 'garages']));
 
         return Apartment::collection($result);
