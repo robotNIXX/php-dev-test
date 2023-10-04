@@ -1,0 +1,50 @@
+version: "3.9"
+
+services:
+  app:
+    image: bitnami/php-fpm:8.2
+    container_name: devApp
+    restart: unless-stopped
+    volumes:
+      - "./../api:/app"
+    working_dir: "/app"
+    ports:
+      - "9000:9000"
+    depends_on:
+      - db
+    networks:
+      - devnetwork
+  web:
+    image: nginx:latest
+    container_name: devWeb
+    working_dir: "/app"
+    volumes:
+      - "./../api:/app"
+      - "./nginx/dev.conf:/etc/nginx/conf.d/dev.conf"
+      - "./nginx/logs:/app/logs"
+    restart: unless-stopped
+    depends_on:
+      - app
+    ports:
+      - "80:80"
+    networks:
+      - devnetwork
+  db:
+    image: mysql:5.7
+    container_name: devDB
+    platform: linux/amd64
+    restart: always
+    volumes:
+      - "./data/mysql:/var/lib/mysql"
+    ports:
+      - "3306:3306"
+    networks:
+      - devnetwork
+    environment:
+      MYSQL_DATABASE: dev
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_PASSWORD: secret
+      MYSQL_USER: dev
+
+networks:
+  devnetwork:
