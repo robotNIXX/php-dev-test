@@ -11,7 +11,7 @@ class SearchRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,7 @@ class SearchRequest extends FormRequest
         return [
             'name' => [
                 'sometimes',
-                'grt:3'
+                'gt:3'
             ],
             'bedrooms' => [
                 'sometimes',
