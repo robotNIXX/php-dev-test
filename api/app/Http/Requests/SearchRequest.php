@@ -22,10 +22,26 @@ class SearchRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'name' => [
+                'sometimes',
+                'grt:3'
+            ],
             'bedrooms' => [
-                'optional',
+                'sometimes',
                 'numeric'
-            ]
+            ],
+            'bathrooms' => [
+                'sometimes',
+                'numeric'
+            ],
+            'storeys' => [
+                'sometimes',
+                'numeric'
+            ],
+            'garages' => [
+                'sometimes',
+                'numeric'
+            ],
         ];
     }
 }
