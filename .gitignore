@@ -1,3 +1,5 @@
 /.idea
 docker/nginx/logs
 docker/data
+/api/bootstrap/cache/.gitignore
+/api/bootstrap/app.php
